@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+  job Page
+{% endblock %}
+
+{% block lgNav %}
+<a href="{{url_for('profile')}}" class="py-5 px-3 ">Profile</a>
+<a href="{{url_for('logout')}}"class="py-2 px-3 bg-purple-700 text-white hover:bg-purple-300 hover:text-purple-800 rounded transition duration-300 ">Log out</a>
+{%endblock%}
+{% block mdNav%}
+<a href="{{url_for('profile')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Profile</a>
+<a href="{{url_for('logout')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Log out</a>
+{%endblock%}
+
+{% block body %}
+<div class="justify-around flex mt-10">
+    <div class="w-11/12 md:w-10/12 bg-white rounded-xl shadow-2xl ">
+        <div class="flex justify-between p-5 md:p-10 lg:p-14 text-gray-800 text-left">
+            <div class="w-8/12">
+                <h2 class="w-40 md:w-96 lg:w-full text-purple-600 font-semibold  py-1 text-xl md:text-2xl">{{job["jobTitle"]}}</h2>
+                <h2 class="w-40 md:w-96  py-1 text-lg md:text-xl">{{job['companyName']}}</h2>
+                <a class="w-40 text-gray-500 py-1 md:text-lg" href="{{job['companyUrl']}}" target="_blank">{{job['companyUrl']}}</a>
+            </div>
+            <div>
+                <img class="w-28 max-h-16 py-1 md:w-36 lg:w-40" src="{{job['companyLogo']}}" alt="logo">
+            </div>
+        </div>
+        <div class="text-left flex md:text-lg lg:px-14  justify-between pb-5 px-5 md:px-10 md:pb-10 text-gray-400">
+            <div class="">
+                <h4>Location:</h4>
+                <h4>{{job['location']}}</h4>
+            </div>
+            <div>
+                <a class="text-purple-700 hover:text-white border border-purple-700 
+                hover:bg-purple-600 focus:ring-4 focus:outline-none focus:ring-purple-300 
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 
+                dark:border-purple-400 dark:text-purple-400 dark:hover:text-white 
+                dark:hover:bg-purple-500 dark:focus:ring-purple-900" href="{{job['applyLink']}}" 
+                target="_blank">Apply</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="whitespace-pre-line justify-around flex mt-10">
+    <div class="w-11/12 md:w-10/12 bg-white rounded-xl shadow-2xl p-5 md:p-10 lg:px-14">
+        <h2 class="font-bold text-2xl">Description</h2>
+        <p class="">{{job['jobdesc']}}</p>
+    </div>
+</div>
+
+{% block js %}
+
+{%endblock%}
+{%endblock%}

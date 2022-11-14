@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+  Home Page
+{% endblock %}
+
+{% block lgNav %}
+<a href="{{url_for('login')}}" class="py-2 px-12 border-[2px] bg-white border-purple-400 text-purple-800 rounded-xl hover:bg-purple-600 hover:text-white transition duration-300">Log In</a>
+<a href="{{url_for('register')}}" class="py-2 px-12 bg-purple-600 text-white hover:bg-white hover:text-purple-800 hover:border-purple-400 border-[2px] rounded-xl transition duration-300 ">Register</a>
+{%endblock%}
+{% block mdNav%}
+<a href="{{url_for('login')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Log in</a>
+<a href="{{url_for('register')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Register</a>
+{%endblock%}
+
+{% block check%}
+class="text-blue-800"
+{%endblock%}
+
+{% block searchJob%}
+
+        <!-- alert box hidden... only visible when trigger clicked search button -->
+            <div id="defaultModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center ">
+                <div class="flex justify-center items-center h-screen">
+                    <div class="relative py-4 w-full max-w-xl  ">
+                        <!-- Modal content -->
+                        <div class="relative bg-white md:py-3 md:px-8 bg-red-200 rounded-lg shadow dark:bg-gray-700 ">
+                            <!-- Modal header -->
+                            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Please Log In To Search Jobs
+                                </h3>
+                                <button id="closebtn" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            
+                            <!-- Modal footer -->
+                            <div class="flex items-center p-6 space-x-2 rounded-b justify-center md:justify-around border-t border-gray-200 dark:border-gray-600">
+                                <button data-modal-toggle="defaultModal" type="button" class="text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 relative"> <a class="block z-1 after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:content-[' ']" href="{{url_for('register')}}">Register</a></button>
+                                <button data-modal-toggle="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-purple-400 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 relative"> <a class="block z-1 after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:content-[' ']" href="{{url_for('login')}}">Log In</a></button>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+       
+        <!-- text Typing  -->
+        <div class="py-5 flex justify-center text-3xl px-4">
+          <p>Inspiring <span class="text-purple-800 element"></span> Jobs for the future !</p>
+      </div>
+      <!-- form to search job -->
+      <div class="py-5 px-4  ">
+          <form action="" class="md:flex md:justify-center">
+              <div class="">
+                  <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="Role: Full stack" name="role">
+              </div>
+              <div>
+                  <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="City: Chennai" name="city">
+              </div>
+              <div>
+                  <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="Country: India" name="country">
+              </div>
+              <div>
+                  <button class="p-2 my-2 w-full border-[2px]  bg-purple-600 rounded text-white hover:bg-white hover:text-purple-800 hover:border-purple-400  " id="go" type="submit"> Go</button>
+              </div>
+          </form>
+      </div>
+      <!-- form to search job end -->
+{%endblock%}
+{% block body %}
+<h2 class="text-center p-10 mt-10 bg-purple-500 text-white text-5xl">Register and login to Search jobs</h2>
+
+<!-- testimonals 1 -->
+<div>
+    <div class="  md:flex ">
+        <!-- image -->
+        <div class="p-5 lg:p-10 lg:w-5/12  bg-[#F4EDFF]">
+            <div class="lg:w-40">
+                <img class="pb-2" src="../static/images/role-collection.png" alt="">
+            </div>
+            <div>
+                <h2 class="pb-2 font-bold text-2xl">Discover jobs across popular roles</h2>
+                <p class="text-gray-500 text-lg">Select a role and we'll show you relevant jobs for it!</p>
+            </div>
+        </div>
+        <!-- side menus -->
+        <div class="px-2 p-5 lg:p-10 pt-6 md:flex items-center text-gray-600 font-semibold bg-gray-100">
+            <div>
+                <button class=" bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="{{url_for('roleBasedJob',job='Full Stack Developer')}}">Full Stack Developer</a></button>
+            <button class="bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="#">mobile app Developer</a></button>
+            <button class="bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="#">Front End Developer</a></button>
+            </div>
+            <div>
+                <button class="bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="#">Data Scientist</a></button>
+            <button class="bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="#">UI / UX Designer</a></button>
+            <button class="bg-white border rounded-lg p-2 my-2 lg:py-4 lg:w-9/12 w-full hover:scale-105"><a href="#">DevOps Engineer</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end -->
+
+<!-- testimonal 2 -->
+<div class="bg-purple-100 p-2 px-10 md:flex items-center md:justify-between">
+    <div class="p-2  md:w-4/12 ">
+        <h2 class="font-bold text-center text-2xl md:text-5xl ">Apply on the Go!</h2>
+        <p class="text-xl py-4 text-center leading-normal md:text-3xl text-gray-500">Register and get a seamless job-hunting experience.</p>
+        <div class="py-2">
+            <div>
+                <div class="flex  py-2">
+                    <p class="">✔️</p>
+                    <div>
+                        <p class="pl-3">Apply wherever you are, easily</p>
+                        <p class="pl-3 text-gray-400">Simple interface will guide your way</p>
+                    </div>
+                </div>
+                <div class="flex  py-2">
+                    <p class="">✔️</p>
+                    <div>
+                        <p class="pl-3">Never miss out on any opportunity</p>
+                        <p class="pl-3 text-gray-400">Get notified on jobs relevant to you</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="md:p-2 md:w-5/12 ">
+        <img src="../static/images/web-design-illustration.png" alt="">
+    </div>
+</div>
+<!-- end -->
+
+{% block js %}
+<script src="{{url_for('static', filename='index.js')}}"></script>
+{%endblock%}
+
+{%endblock%}
+

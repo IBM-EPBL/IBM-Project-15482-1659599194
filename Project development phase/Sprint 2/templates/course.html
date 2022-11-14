@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard Page
+{% endblock %}
+
+{% block lgNav %}
+<a href="{{url_for('profile')}}" class="py-5 px-3 ">Profile</a>
+<a href="{{url_for('logout')}}"
+    class="py-2 px-3 bg-purple-700 text-white hover:bg-purple-300 hover:text-purple-800 rounded transition duration-300 ">Log
+    out</a>
+{%endblock%}
+{% block mdNav%}
+<a href="{{url_for('profile')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Profile</a>
+<a href="{{url_for('logout')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Log out</a>
+{%endblock%}
+
+<!-- comes under nav bar -->
+{% block searchJob%}
+<!-- text Typing  Animation-->
+<div class="py-5 flex justify-center text-3xl px-4">
+    <p>Inspiring <span class="text-purple-800 element"></span> Jobs for the future !</p>
+</div>
+<!-- form to search job -->
+<div class="py-5 px-4  ">
+    <form action="/search" class="md:flex md:justify-center" id="form-1" method="POST">
+        <div class="">
+            <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="Role: Full stack" name="role">
+        </div>
+        <div>
+            <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="City: Chennai" name="city">
+        </div>
+        <div>
+            <input class="p-2 my-2 w-full border-[1px]" type="text" placeholder="Country: India" name="country">
+        </div>
+
+        <div class="md:flex ">
+            {% if session['user']['jobFetchCount'] == 3 %}
+            <button class="p-2 my-2 w-full border-[2px]  bg-purple-600 rounded text-white hover:bg-white hover:text-purple-800 hover:border-purple-400  " id="searchBtn"> 
+                Go
+            </button>
+            {% else %}
+            <button id="goButton" class="p-2 my-2 w-full border-[2px]  bg-purple-600 rounded text-white hover:bg-white hover:text-purple-800 hover:border-purple-400  " > 
+                Go
+            </button>
+            {%endif%}
+
+            <div
+                class="relative p-2 my-2 w-full border-[2px]  bg-green-400 rounded text-white hover:bg-white hover:text-green-800 hover:border-green-400 text-center ">
+                <a class="block z-1 after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:content-[' ']"
+                    href="{{url_for('history',history=0)}}">History</a>
+            </div>
+        </div>
+
+    <!-- this is prompt when user clicks search job button  -->
+    <!-- It's hidden only visible when user click 'GO' or Job Serach button -->
+    <div>
+        <div id="popup-modal" tabindex="-1"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center"
+            aria-hidden="true">
+            <div class="flex justify-center items-center h-screen">
+                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button type="button" id="promptClose"
+                            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                            data-modal-toggle="popup-modal">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="p-6 text-center">
+                            <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                <h3>In Free tier you are allowed only 3 Search </h3>
+                                <h3>Are you sure use one</h3>
+                            </div>
+                            <button value="submit"  type="button" id="confirmSearch" form="form-1"  type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        submit </button>
+                            <button data-modal-toggle="popup-modal" type="button" id="cancelBtn"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No,
+                                cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end  -->
+
+
+
+
+    </form>
+
+    <!-- this is alert when user use more than 3 searches -->
+    <!-- It's hidden only visible when user click 'GO' or Job Serach button -->
+    <div class="md:flex md:justify-center">
+        <div id="alertBorder" class="hidden flex p-4 mb-4 bg-yellow-100 border-t-4 border-yellow-500 dark:bg-yellow-200" role="alert">
+            <svg class="flex-shrink-0 w-5 h-5 text-yellow-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+            <div class="ml-3 text-sm font-medium text-yellow-700">
+                You Used 3 searches If you need more Please Mail to this ID  <a href="#" class="font-semibold underline hover:text-yellow-800">prakasha.ece19@gmail.com"</a>.
+            </div>
+            <button type="button" id="alertBorderClose" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-100 dark:bg-yellow-200 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 dark:hover:bg-yellow-300 inline-flex h-8 w-8" data-dismiss-target="#alert-border-4" aria-label="Close">
+              <span class="sr-only">Dismiss</span>
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </div>
+    <!-- end -->
+
+</div>
+<!-- form to search job end -->
+{%endblock%}
+
+{% block body %}
+<!-- <h2 class="text-center p-10 my-14 mx-28 rounded-xl bg-blue-500 text-white text-5xl">heloo {{username}} <br> Job is Loading soon</h2> -->
+<!-- card start -->
+{% for job in jobs %}
+
+
+
+<div class="justify-around flex mt-10 ">
+    <button class="w-11/12 md:w-10/12 bg-white rounded-xl shadow-2xl hover:scale-105 jobid  relative "
+        data-id="{{job['id']}}">
+        <div class="flex justify-between p-5 md:p-10 lg:p-14 text-gray-800 text-left">
+            <div class="w-8/12">
+                <h2 class="w-40 md:w-96 lg:w-full text-purple-600 font-semibold  py-1 text-xl md:text-2xl">
+                    {{job["jobTitle"]}}</h2>
+                <h2 class="w-40 md:w-96  py-1 text-lg md:text-xl">{{job['companyName']}}</h2>
+                {% if job['companyUrl'] !=None %}
+                <a class="w-40 text-gray-500 py-1 md:text-lg " href="{{job['companyUrl']}}"
+                    target="_blank">{{job['companyUrl']}}</a>
+                {%endif%}
+            </div>
+            <div>
+                <img class="w-28 max-h-16 py-1 md:w-36 lg:w-40" src="{{job['companyLogo']}}" alt="logo">
+            </div>
+        </div>
+        <div class="text-left flex md:text-lg lg:px-14  justify-between pb-5 px-5 md:px-10 md:pb-10 text-gray-400">
+            <div class="">
+                <h4>Location:</h4>
+                <h4>{{job['location']}}</h4>
+                {% if count == 'None' %}
+                <h4><a href="{{url_for('apply',x=job['cloudId'])}}"
+                        class="block z-1 after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:content-[' ']">Click
+                        here for <span class="text-purple-500">more details</span></a></h4>
+                {% else %}
+                <h4><a href="{{url_for('applys',x=job['cloudId'],count=count)}}"
+                        class="block z-1 after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:content-[' ']">Click
+                        here for <span class="text-purple-500">more details</span></a></h4>
+                {%endif%}
+            </div>
+            <div>
+                <h4>Salary:</h4>
+                {% if job['salary'] == None %}
+                <h4>Not Disclosed</h4>
+                {% else %}
+                <h4>{{job['salary']}}</h4>
+                {%endif%}
+            </div>
+        </div>
+    </button>
+</div>
+
+{% endfor %}
+<!-- card end -->
+
+{% block js %}
+<script src="{{url_for('static', filename='job.js')}}"></script>
+<script src="{{url_for('static', filename='searchConfirm.js')}}"></script>
+{%endblock%}
+
+{% endblock%}
