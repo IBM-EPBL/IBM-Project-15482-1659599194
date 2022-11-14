@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title%}{% endblock%}</title>
+	<!-- link tailwind csss -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	{% block link%} {% endblock%}
+</head>
+
+<body>
+
+	<!-- nav bar start -->
+	<div class="bg-gray-200">
+		<div class="max-w-6xl px-4  mx-auto border ">
+			<div class="flex justify-between">
+
+				<div class="flex space-x-4 ">
+					<!-- logo -->
+					<div class="">
+						<a href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+							<svg class="h-6 w-6 mr-1 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+								viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round"
+									d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+							</svg>
+							<span class="font-bold">Job Hunter</span>
+						</a>
+					</div>
+					<!-- primary nav -->
+					<div class="flex hidden md:flex items-center spcae-x-1 ">
+						<a href="{{url_for('check')}}"  class="py-5 px-3 text-gray-700 hover:text-gray-900">Home</a>
+						<a href="{{url_for('course')}}" class=" py-5 px-3 text-gray-700 hover:text-gray-900">Courses</a>
+					</div>
+				</div>
+				<!-- sec nav -->
+				<div class="flex hidden md:flex items-center space-x-1">
+					{% block lgNav %}
+					{%endblock%}
+				</div>
+				<!-- mobile button -->
+				<div class="md:hidden flex items-center">
+					<button class="mobile-menu-button">
+						<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+							stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+						</svg>
+					</button>
+				</div>
+
+			</div>
+		</div>
+		<!-- mobile menu -->
+		<div class="hidden mobile-menu md:hidden">
+			<a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">About</a>
+			<a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Courses</a>
+			{% block mdNav%}
+			{%endblock%}
+		</div>
+
+	</div>
+	<!-- nav bar scripts -->
+	<script>
+		// grab everything we need
+		const btn = document.querySelector('button.mobile-menu-button');
+		const menu = document.querySelector(".mobile-menu");
+
+		// add event listener
+		btn.addEventListener("click", () => {
+			menu.classList.toggle("hidden");
+		});
+	</script>
+	<!-- nav bar end -->
+
+	{% block body  %}
+	{% endblock%}
+
+</body>
+
+</html>

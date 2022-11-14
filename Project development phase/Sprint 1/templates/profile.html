@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+  Dashboard Page
+{% endblock %}
+
+{% block lgNav %}
+<a href="{{url_for('profile')}}" class="py-5 px-3 text-blue-800">Profile</a>
+<a href="{{url_for('logout')}}"class="py-2 px-3 bg-purple-700 text-white hover:bg-purple-300 hover:text-purple-800 rounded transition duration-300 ">Log out</a>
+{%endblock%}
+{% block mdNav%}
+<a href="{{url_for('profile')}}" class="block py-2 px-4 text-sm text-blue-800 hover:bg-gray-200">Profile</a>
+<a href="{{url_for('logout')}}" class="block py-2 px-4 text-sm hover:bg-gray-200">Log out</a>
+{%endblock%}
+
+{% block body %}
+<!-- profile card -->
+<!--BG-->
+<div class=" flex justify-center items-center h-screen ">
+    <!--Card-->
+        <div class="bg-purple-600 flex flex-col w-2/3 md:w-1/3 gap-4 py-8 px-6 rounded-xl shadow-xl border   border-purple-400">
+          <!--Avatar-->
+          <div class="flex justify-between">
+            <div><img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" alt="Profile Avatar" class="w-16 h-16 rounded-full shadow-md"></div>
+            <div><button class="text-gray-300 hover:text-white">Edit</button></div>
+          </div>
+          <div class="text-white">            
+    <!--Role-->
+          <p class="text-sm">UI/UX Designer</p>
+    <!--Name-->
+          <p class="font-bold text-2xl">{{username}}</p>
+    <!--Description-->
+          <p class="text-justify text-sm">{{email}}</p>
+    <!-- phone number -->
+          <p class="text-justify text-sm"></p>
+          </div>
+    
+    <!--Tools chip-->
+          <div class="flex flex-row gap-1 text-xs text-white font-semibold">
+            <div class="rounded-full border border-purple-100 py-1 px-2">
+              <span>Figma</span>
+            </div>
+            
+            <div class="rounded-full border border-purple-100 py-1 px-2">
+              <span>Sketch</span>
+            </div>
+            
+            <div class="rounded-full border border-purple-100 py-1 px-2">
+              <span>Photoshop</span>
+            </div>
+          </div>
+     
+        </div>
+      </div>
+    
+<!-- profile card end -->
+{% endblock%}
