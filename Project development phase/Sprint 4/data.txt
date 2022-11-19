@@ -1,0 +1,39 @@
+CREATE TABLE companytb (
+  CompanyName varchar(250) NOT NULL,
+  Regno varchar(250) NOT NULL,
+  Mobile varchar(250) NOT NULL,
+  Email varchar(250) NOT NULL,
+  Website varchar(250) NOT NULL,
+  Address varchar(500) NOT NULL,
+  Username varchar(250) NOT NULL,
+  Password varchar(250) NOT NULL
+  )
+
+
+
+  CREATE TABLE jobtb (
+  CompanyName varchar(250) NOT NULL,
+  ContactNo varchar(250) NOT NULL,
+  Address varchar(250) NOT NULL,
+  Location varchar(250) NOT NULL,
+  Vacancy varchar(250) NOT NULL,
+  Job varchar(250) NOT NULL,
+  Department varchar(250) NOT NULL,
+  website varchar(250) NOT NULL,
+  Cname varchar(250) NOT NULL
+)
+
+
+
+CREATE TABLE regtb (
+  Name varchar(250) NOT NULL,
+  Gender varchar(250) NOT NULL,
+  Age varchar(250) NOT NULL,
+  Email varchar(250) NOT NULL,
+  Phone varchar(250) NOT NULL,
+  Address varchar(250) NOT NULL,
+  Degree varchar(250) NOT NULL,
+  Department varchar(250) NOT NULL,
+  UserName varchar(250) NOT NULL,
+  Password varchar(250) NOT NULL
+)
